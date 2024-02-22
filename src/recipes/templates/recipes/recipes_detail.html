@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <title>{{ recipe.name }}</title>
+    <link rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="{% static 'recipes/css/recipes_detail.css' %}"
+    />
+  </head>
+  <body>
+    <div class="content-container">
+      {% include 'recipes/navbar.html' %}
+      <div class="recipe-container">
+        <div class="back-link-container">
+          <a href="{{ request.META.HTTP_REFERER }}">Back</a>
+        </div>
+        <h1>{{recipe.name}}</h1>
+        <div class="main-info">
+          <img
+            class="recipe-img"
+            src="{{ recipe.pic.url }}"
+            alt="{{ recipe.name }}"
+          />
+          <div class="main-info-text">
+            <p>{{recipe.description}}</p>
+            <div class="inline-row">
+              <h2>Cooking Time:</h2>
+              <p>{{ recipe.cook_time }} mins</p>
+            </div>
+            <div class="inline-row">
+              <h2>Difficulty:</h2>
+              <p>{{recipe.difficulty}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="ingredients">
+          <h2>Ingredients</h2>
+          <ul>
+            {% for recipe_ingredient in recipe_ingredients %}
+            <li>{{recipe_ingredient.ingredient.name}}</li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div class="instructions">
+          <h2>Instructions</h2>
+          <p>{{recipe.instructions|linebreaks}}</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

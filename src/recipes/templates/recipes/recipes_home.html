@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <title>Recipes</title>
+    <link rel="stylesheet" href="{% static 'recipes/css/home.css' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div class="content-container">
+      <img src="/media/welcome.jpg" alt="Recipes" />
+      <div class="text-container">
+        <h1 class="welcome-text">Welcome to Recipes</h1>
+        <a href="{% url 'login' %}">Login</a>
+      </div>
+    </div>
+  </body>
+</html>

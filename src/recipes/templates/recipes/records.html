@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <title>Search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'recipes/css/search.css' %}" />
+  </head>
+  <body>
+    <div class="content-container">
+      <!-- Navbar -->
+      {% include 'recipes/navbar.html' %}
+
+      <!-- Search form -->
+      <form action="" method="POST">
+        {% csrf_token %}
+        <div class="form-group-container">
+          <div class="form-group">
+            <label for="id_recipe">Recipe:</label>
+            {{ form.recipe }}
+          </div>
+          <div class="form-group">
+            <label for="id_ingredient">Ingredient:</label>
+            {{ form.ingredient }}
+          </div>
+          <div class="form-group">
+            <label for="id_difficulty">Difficulty:</label>
+            {{ form.difficulty }}
+          </div>
+        </div>
+        <button type="submit">Search</button>
+      </form>
+
+      <div class="results-container">
+        <!-- Recipe cards -->
+        <div class="card-container">
+          {% for index, row in recipes_df.iterrows %}
+          <div class="card">
+            <img
+              class="card-img"
+              src="{{ MEDIA_URL }}{{ row.pic }}"
+              alt="{{ row.name }}"
+            />
+            <a href="{% url 'recipes:recipes-detail' pk=row.id %}"
+              >{{ row.name }}</a
+            >
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- Chart Tabs-->
+        <div class="tab-container">
+          <!-- Labels -->
+          <ul class="tab-labels">
+            <li
+              class="tab-label active"
+              onclick="showTab(event, 'bar-chart-tab')"
+            >
+              Bar Chart
+            </li>
+            <li class="tab-label" onclick="showTab(event, 'pie-chart-tab')">
+              Pie Chart
+            </li>
+            <li class="tab-label" onclick="showTab(event, 'line-chart-tab')">
+              Line Chart
+            </li>
+          </ul>
+
+          {% if charts %}
+          <!-- Charts -->
+          <div class="tab active" id="bar-chart-tab">
+            <img
+              src="data:image/png;base64, {{ charts.0|safe }}"
+              alt="chart 1"
+              width="100%"
+            />
+          </div>
+          <div class="tab" id="pie-chart-tab">
+            <img
+              src="data:image/png;base64, {{ charts.1|safe }}"
+              alt="chart 2"
+              width="100%"
+            />
+          </div>
+          <div class="tab" id="line-chart-tab">
+            <img
+              src="data:image/png;base64, {{ charts.2|safe }}"
+              alt="chart 3"
+              width="100%"
+            />
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <script src="{% static 'recipes/js/tabs.js'%}"></script>
+  </body>
+</html>

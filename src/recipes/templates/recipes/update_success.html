@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <title>Success</title>
+    <link rel="stylesheet" href="{% static '/css/success.css' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div class="content-container">
+      <img src="{{ MEDIA_URL }}welcome.jpg" alt="Recipes" />
+      <h1>Success</h1>
+      <p>You have successfully updated the recipe.</p>
+      <a href="{% url 'recipes:user-profile' %}">OK</a>
+    </div>
+  </body>
+</html>

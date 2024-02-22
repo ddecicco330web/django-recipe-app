@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'recipes/css/profile.css' %}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="{% static 'recipes/js/modal.js' %}"></script>
+  </head>
+  <body>
+    <div class="content-container">
+      <!--Navbar-->
+      {% include 'recipes/navbar.html' %}
+
+      <h1>{{ user.username }}</h1>
+
+      <!--User Recipes-->
+      <h2>Your Recipes</h2>
+      <div class="card-container">
+        <div class="add-card card" onclick="handleOpen()">
+          <img
+            class="card-img add-card-img"
+            src="{% static 'recipes/img/add.png' %}"
+            alt="add"
+          />
+        </div>
+        {% for recipe in recipes %}
+        <div class="card">
+          <img
+            class="card-img"
+            src="{{ recipe.pic.url }}"
+            alt="{{ recipe.name }}"
+          />
+          <a href="{{ recipe.get_absolute_url }}">{{ recipe.name }}</a>
+          <div class="card-buttons">
+            <a href="{{recipe.get_update_url}}">
+              <button class="update-button">
+                <img
+                  src="{% static 'recipes/img/edit.png' %}"
+                  alt="edit"
+                  class="edit-img"
+                />
+              </button>
+            </a>
+            <a href="{{recipe.get_delete_url}}">
+              <button class="delete-button">X</button>
+            </a>
+          </div>
+        </div>
+
+        {% endfor %}
+      </div>
+
+      <!--Add Recipe Modal-->
+      {% if form_errors %}
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          console.log('open modal');
+          handleOpen();
+        });
+      </script>
+      {% endif %}
+      <div class="add-recipe-modal">
+        <form method="post" enctype="multipart/form-data">
+          <button class="close-button" type="button" onclick="{handleClose()}">
+            X
+          </button>
+          {{form_errors}} {% csrf_token %}
+          <div class="form-group-container">
+            <!--Left Column-->
+            <div class="left-column">
+              <div class="form-group">
+                <label>Name:</label>
+                {{ form.name }}
+              </div>
+              <div class="form-group">
+                <label>Cook Time (min):</label>
+                {{ form.cook_time }}
+              </div>
+              <div class="form-group">
+                <label>Picture:</label>
+                {{ form.pic }}
+              </div>
+              <div class="form-group">
+                <label>Description:</label>
+                {{ form.description }}
+              </div>
+            </div>
+
+            <!--Right Column-->
+            <div class="right-column">
+              <div class="form-group">
+                <label>Ingredients:</label>
+                {{ form.ingredients }}
+              </div>
+              <div class="form-group">
+                <label>Instructions:</label>
+                {{ form.instructions }}
+              </div>
+            </div>
+          </div>
+          <button class="add-button" type="submit">Add</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

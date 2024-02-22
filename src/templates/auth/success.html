@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <title>Success</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="{% static 'css/success.css' %}" />
+  </head>
+  <body>
+    <div class="content-container">
+      <img src="{{ MEDIA_URL }}welcome.jpg" alt="Recipes" />
+      <h1>Success</h1>
+      <p>You have successfully logged out.</p>
+      <a href="{% url 'login' %}">Login</a>
+    </div>
+  </body>
+</html>
