@@ -1,0 +1,29 @@
+@import url('../../../../static/css/global.css');
+
+.content-container img {
+  position: absolute;
+  height: 100vh;
+  width: 100%;
+  z-index: -1;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 100%;
+  flex-wrap: wrap;
+}
+
+.welcome-text {
+  z-index: 1;
+  color: white;
+  font-size: 60px;
+}
+
+a {
+  font-size: 40px;
+  color: orange;
+}
