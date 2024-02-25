@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="content-container">
-      <img src="{{ MEDIA_URL }}welcome.jpg" alt="Recipes" />
+      <img src="{% static '/img/welcome.jpg' %}" alt="Recipes" />
       <h1>Success</h1>
       <p>You have successfully logged out.</p>
       <a href="{% url 'login' %}">Login</a>
