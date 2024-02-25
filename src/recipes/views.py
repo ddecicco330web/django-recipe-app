@@ -94,9 +94,11 @@ def records(request):
                 recipes_df = pd.DataFrame(qs.values())
             else:
                 recipes_df = pd.DataFrame()
-          
+
+     
     if recipes_df.empty is False:
-        chart=get_chart(recipes_df, labels=recipes_df['cook_time'].values)   
+        difficulty = recipes_df['difficulty'].value_counts()
+        chart=get_chart(difficulty, labels=recipes_df['difficulty'].unique())   
                
     context = {'form': form, 'recipes_df': recipes_df, 'chart': chart}      
     return render(request, 'recipes/records.html', context)

@@ -34,9 +34,7 @@ def get_chart(data, **kwargs):
 
     # add pie chart
     labels=kwargs.get('labels')
-    plt.pie(data['cook_time'], labels=labels)
-    plt.legend(data['name'], bbox_to_anchor=(0.85,1.025), loc="upper left")
-    plt.subplots_adjust(left=0.1, bottom=0.1, right=0.75)
+    plt.pie(data, labels=labels)
     plt.tight_layout()
     chart = get_graph()
 
