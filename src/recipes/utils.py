@@ -25,40 +25,19 @@ def get_graph():
    return graph
 
 # get_charts: Returns a list of base64 encoded images of the bar, pie, and line charts
-def get_charts(data, **kwargs):
+def get_chart(data, **kwargs):
     #switch plot backend to AGG (Anti-Grain Geometry) - to write to file
     plt.switch_backend('AGG')
 
     #specify figure size
-    fig=plt.figure(figsize=(5,4))
-
-    # get charts
-    # add bar chart
-    plt.bar(data['name'], data['cook_time'])
-    plt.xlabel('Name')
-    plt.ylabel('Cook Time (min)')
-    plt.xticks(rotation=30)
-    #specify layout details
-    plt.tight_layout()
-    charts = [get_graph()]
-
-     # clear the figure
-    plt.clf()
+    plt.figure(figsize=(5,4))
 
     # add pie chart
     labels=kwargs.get('labels')
     plt.pie(data['cook_time'], labels=labels)
-    plt.legend(data['name'], loc='best') 
+    plt.legend(data['name'], bbox_to_anchor=(0.85,1.025), loc="upper left")
+    plt.subplots_adjust(left=0.1, bottom=0.1, right=0.75)
     plt.tight_layout()
-    charts.append(get_graph())
-    plt.clf()
+    chart = get_graph()
 
-    # add line chart
-    plt.plot(data['name'], data['cook_time'])
-    plt.xlabel('Name')
-    plt.ylabel('Cook Time (min)')
-    plt.xticks(rotation=30)
-    plt.tight_layout()
-    charts.append(get_graph())
-
-    return charts
+    return chart

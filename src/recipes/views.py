@@ -12,7 +12,7 @@ from recipe_ingredients.models import RecipeIngredient
 from ingredients.models import Ingredient
 from .forms import RecipesSearchForm
 from .forms import RecipeForm
-from .utils import get_charts
+from .utils import get_chart
 
 # Third-party imports
 import pandas as pd
@@ -57,7 +57,7 @@ def records(request):
     form = RecipesSearchForm(request.POST or None)
     qs = None
     recipes_df = pd.DataFrame(Recipe.objects.all().values())
-    charts = None
+    chart = None
 
     if request.method == 'POST':
         form = RecipesSearchForm(request.POST)
@@ -96,9 +96,9 @@ def records(request):
                 recipes_df = pd.DataFrame()
           
     if recipes_df.empty is False:
-        charts=get_charts(recipes_df, labels=recipes_df['cook_time'].values)   
+        chart=get_chart(recipes_df, labels=recipes_df['cook_time'].values)   
                
-    context = {'form': form, 'recipes_df': recipes_df, 'charts': charts}      
+    context = {'form': form, 'recipes_df': recipes_df, 'chart': chart}      
     return render(request, 'recipes/records.html', context)
 
 # ProfileView: Renders the user profile page for the recipes app       

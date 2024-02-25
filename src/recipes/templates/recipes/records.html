@@ -48,47 +48,14 @@
           {% endfor %}
         </div>
 
-        <!-- Chart Tabs-->
-        <div class="tab-container">
-          <!-- Labels -->
-          <ul class="tab-labels">
-            <li
-              class="tab-label active"
-              onclick="showTab(event, 'bar-chart-tab')"
-            >
-              Bar Chart
-            </li>
-            <li class="tab-label" onclick="showTab(event, 'pie-chart-tab')">
-              Pie Chart
-            </li>
-            <li class="tab-label" onclick="showTab(event, 'line-chart-tab')">
-              Line Chart
-            </li>
-          </ul>
-
-          {% if charts %}
-          <!-- Charts -->
-          <div class="tab active" id="bar-chart-tab">
-            <img
-              src="data:image/png;base64, {{ charts.0|safe }}"
-              alt="chart 1"
-              width="100%"
-            />
-          </div>
-          <div class="tab" id="pie-chart-tab">
-            <img
-              src="data:image/png;base64, {{ charts.1|safe }}"
-              alt="chart 2"
-              width="100%"
-            />
-          </div>
-          <div class="tab" id="line-chart-tab">
-            <img
-              src="data:image/png;base64, {{ charts.2|safe }}"
-              alt="chart 3"
-              width="100%"
-            />
-          </div>
+        {% if chart %}
+        <!-- Charts -->
+        <div class="chart-container">
+          <img
+            src="data:image/png;base64, {{ chart|safe }}"
+            alt="pie chart"
+            width="100%"
+          />
         </div>
         {% endif %}
       </div>
