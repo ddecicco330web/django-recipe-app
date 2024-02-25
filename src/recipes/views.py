@@ -91,6 +91,7 @@ def records(request):
 
             # Create a dataframe with the filtered recipes
             if qs:
+                qs = qs.order_by('name')
                 recipes_df = pd.DataFrame(qs.values())
             else:
                 recipes_df = pd.DataFrame()
@@ -113,7 +114,7 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user
         context['form'] = RecipeForm()
-        context['recipes'] = Recipe.objects.filter(created_by=self.request.user)
+        context['recipes'] = Recipe.objects.filter(created_by=self.request.user).order_by('name')
         return context
     
     def post(self, request, *args, **kwargs):
