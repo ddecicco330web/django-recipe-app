@@ -66,4 +66,4 @@ class RecipeRecordsViewTest(TestCase):
         response = self.c.get('/search/')
         self.assertTrue('form' in response.context)
         self.assertTrue('recipes_df' in response.context)
-        self.assertTrue('charts' in response.context)
+        self.assertTrue('chart' in response.context)
