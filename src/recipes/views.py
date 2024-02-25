@@ -56,7 +56,7 @@ class RecipeDetailView(LoginRequiredMixin, DetailView):
 def records(request):
     form = RecipesSearchForm(request.POST or None)
     qs = None
-    recipes_df = pd.DataFrame(Recipe.objects.all().values())
+    recipes_df = pd.DataFrame(Recipe.objects.all().order_by('name').values())
     chart = None
 
     if request.method == 'POST':
